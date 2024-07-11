@@ -93,8 +93,9 @@ conv(u, ∇u) = (∇u') ⋅ u
 buss(v,c1,c2) = beta * v[2] * (c1+c2) #verificar se é const ou var
 wwc1(u) = u - s1  #wwc é o up_i no mini artigo! 
 wwc2(u) = u - s2
-F1(c1)=-Kdis*c1
-F2(c1)=Kdis*c1
+# Renomear funções para evitar conflito
+F1_func(c1) = -Kdis * c1
+F2_func(c1) = Kdis * c1
 #convc1(u, ∇c1) = (∇c1) ⋅ u
 #convc2(u, ∇c2) = (∇c2) ⋅ u
 
@@ -105,8 +106,8 @@ a((u, p, c1, c2), (v, q, r1, r2)) = ∫( 1/Re*(∇(v)⊙∇(u)) - (∇⋅v)*p + 
                           ∫( buss∘(v,c1,c2) )dΩ +
                           ∫( r1 ⋅ inner(wwc1(u), ∇(c1)) )dΩ + 
                           ∫( r2 ⋅ inner(wwc2(u), ∇(c2)) )dΩ - 
-                          ∫((F1∘(c1))*r1)dΩ - 
-                          ∫((F2∘(c1))*r2)dΩ +
+                          ∫((F1_func∘(c1))*r1)dΩ - 
+                          ∫((F2_func∘(c1))*r2)dΩ +
                           ∫( (v ⋅ n_Γₕ) * (beta * c1) )dΓₕ +
                           ∫( (v ⋅ n_Γₕ) * (beta * c2) )dΓₕ
 
